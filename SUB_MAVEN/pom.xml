@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>MAVEN</artifactId>
+        <groupId>com.sunyard</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>SUB_MAVEN</artifactId>
+
+    <name>MAVEN_SUB1</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <!--<username>zhangsan</username>-->
+        <!--<password>123456</password>-->
+        <env-name>test</env-name>
+    </properties>
+
+
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.sunyard</groupId>
+            <artifactId>SUB_MAVEN2</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+
+
+
+
+    <build>
+
+
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.properties</include>
+                    <include>*.yml</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <build>
+                <filters>
+                    <filter>${project.basedir}/src/main/resources/${env-name}.properties</filter>
+                </filters>
+            </build>
+            <properties>
+                <username>12311</username>
+                <password>4567811111111111</password>
+                <profiles.active>test</profiles.active>
+            </properties>
+
+        </profile>
+
+
+        <profile>
+            <id>uat</id>
+            <build>
+                <filters>
+                    <filter>${project.basedir}/src/main/resources/${env-name}.properties</filter>
+                </filters>
+            </build>
+            <properties>
+                <username>456</username>
+                <password>456465456</password>
+                <profiles.active>uat</profiles.active>
+            </properties>
+
+        </profile>
+
+
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>pro</id>
+            <properties>
+                <profiles.active>pro</profiles.active>
+            </properties>
+
+        </profile>
+    </profiles>
+</project>
